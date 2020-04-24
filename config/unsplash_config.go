@@ -4,7 +4,7 @@ type unsplash struct {
 	Search       []string
 	SelectRandom bool
 	Resolution   resolution
-	Schedule     int
+	Interval     int64
 }
 
 type resolution struct {
@@ -21,5 +21,5 @@ var Unsplash = unsplash{
 		Width:  2560,
 		Height: 1440,
 	},
-	Schedule: 1,
+	Interval: 1,
 }

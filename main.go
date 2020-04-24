@@ -4,11 +4,13 @@ import (
 	"github.com/martinlindhe/notify"
 	"github.com/reujab/wallpaper"
 	"time"
+	"unsplash-background/config"
 	"unsplash-background/downloader"
 )
 
 func main() {
-	ticker := time.NewTicker(5 * time.Hour)
+
+	ticker := time.NewTicker(time.Duration(config.Unsplash.Interval) * time.Hour)
 
 	err := downloadAndSetBackground()
 	if err != nil {
