@@ -2,10 +2,10 @@ package main
 
 import (
 	"github.com/martinlindhe/notify"
-	"github.com/reujab/wallpaper"
 	"time"
 	"unsplash-background/config"
 	"unsplash-background/downloader"
+	"unsplash-background/setter"
 )
 
 func main() {
@@ -17,11 +17,8 @@ func main() {
 		return
 	}
 
-	done := make(chan bool)
 	for {
 		select {
-		case <-done:
-			return
 		case <-ticker.C:
 			err := downloadAndSetBackground()
 			if err != nil {
@@ -29,14 +26,12 @@ func main() {
 			}
 		}
 	}
-
-	done <- true
 }
 
 func downloadAndSetBackground() error {
 	wallpaperPath := downloader.UnsplashDownload()
 	notify.Notify("Unsplash", "Unsplash", "Background Changed", "")
-	err := wallpaper.SetFromFile(wallpaperPath)
+	err := setter.SetFromFile(wallpaperPath)
 
 	return err
 }
